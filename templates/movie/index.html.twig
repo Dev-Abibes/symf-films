@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MovieController!{% endblock %}
+
+{% block body %}
+   <h1>Popular Movies</h1>
+    <ul>
+        {% for movie in movies %}
+            <li>{{ movie.title }} ({{ movie.release_date }})</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

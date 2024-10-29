@@ -1,0 +1,12 @@
+153158,127.0.0.1,GET,http://127.0.0.1:8000/,1730210954,,404,request
+0c23b9,127.0.0.1,GET,http://127.0.0.1:8000/,1730210957,,404,request
+cec1e5,127.0.0.1,GET,http://127.0.0.1:8000/movies,1730210961,502cc8,404,request
+502cc8,127.0.0.1,GET,http://127.0.0.1:8000/movies,1730210961,,404,request
+7c8080,127.0.0.1,GET,http://127.0.0.1:8000/movie,1730210963,fb0b31,404,request
+fb0b31,127.0.0.1,GET,http://127.0.0.1:8000/movie,1730210963,,404,request
+3d250c,127.0.0.1,GET,http://127.0.0.1:8000/movie,1730210966,cb5747,404,request
+cb5747,127.0.0.1,GET,http://127.0.0.1:8000/movie,1730210966,,404,request
+2f3d8c,127.0.0.1,GET,http://127.0.0.1:8000/movies,1730210976,3b25e1,404,request
+3b25e1,127.0.0.1,GET,http://127.0.0.1:8000/movies,1730210976,,404,request
+915d85,127.0.0.1,GET,http://localhost:8000/movies,1730217838,96280f,500,request
+96280f,127.0.0.1,GET,http://localhost:8000/movies,1730217838,,500,request

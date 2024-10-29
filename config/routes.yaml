@@ -1,0 +1,11 @@
+controllers:
+    resource:
+        path: ../src/Controller/
+        namespace: App\Controller
+    type: attribute
+    
+# config/routes.yaml
+movies:
+    path: /movies
+    controller: App\Controller\MovieController::index
+    methods: GET
