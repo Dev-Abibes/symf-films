@@ -269,6 +269,6 @@ class __TwigTemplate_a84bf7529fc9feb6d2b105fb52f3feb9 extends Template
         </div>
     {% endif %}
 {% endblock %}
-", "@WebProfiler/Collector/exception.html.twig", "/Users/securiteh/LabCoding/symf-films/my_project_directory/vendor/symfony/web-profiler-bundle/Resources/views/Collector/exception.html.twig");
+", "@WebProfiler/Collector/exception.html.twig", "/Users/securiteh/LabCoding/symf-films/vendor/symfony/web-profiler-bundle/Resources/views/Collector/exception.html.twig");
     }
 }

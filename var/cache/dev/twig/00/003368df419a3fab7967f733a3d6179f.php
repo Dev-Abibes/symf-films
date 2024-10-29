@@ -836,6 +836,6 @@ class __TwigTemplate_0b1de6747a2fb8413e9826b8e01cd33d extends Template
         {% endif %}
     </div>
 {% endblock %}
-", "@WebProfiler/Collector/command.html.twig", "/Users/securiteh/LabCoding/symf-films/my_project_directory/vendor/symfony/web-profiler-bundle/Resources/views/Collector/command.html.twig");
+", "@WebProfiler/Collector/command.html.twig", "/Users/securiteh/LabCoding/symf-films/vendor/symfony/web-profiler-bundle/Resources/views/Collector/command.html.twig");
     }
 }

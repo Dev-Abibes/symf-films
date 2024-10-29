@@ -365,6 +365,6 @@ class __TwigTemplate_9070967837309991a7478872b804d9a6 extends Template
         </div>
     </form>
 </div>
-", "@WebProfiler/Profiler/search.html.twig", "/Users/securiteh/LabCoding/symf-films/my_project_directory/vendor/symfony/web-profiler-bundle/Resources/views/Profiler/search.html.twig");
+", "@WebProfiler/Profiler/search.html.twig", "/Users/securiteh/LabCoding/symf-films/vendor/symfony/web-profiler-bundle/Resources/views/Profiler/search.html.twig");
     }
 }

@@ -5,13 +5,13 @@ framework:
     esi: true
     fragments: true
 
-    http_client:
-        scoped_clients:
-            tmdb.client:
-                base_uri: 'https://api.themoviedb.org/3/'
-                headers:
-                    Accept: 'application/json'
-                    Authorization: 'Bearer %env(TMDB_API_TOKEN)%'
+    # http_client:
+    #     scoped_clients:
+    #         tmdb.client:
+    #             base_uri: 'https://api.themoviedb.org/3/'
+    #             headers:
+    #                 Accept: 'application/json'
+    #                 Authorization: 'Bearer %env(TMDB_API_TOKEN)%'
 
 when@test:
     framework:

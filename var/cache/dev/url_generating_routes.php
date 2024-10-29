@@ -17,5 +17,11 @@ return [
     '_profiler_router' => [['token'], ['_controller' => 'web_profiler.controller.router::panelAction'], [], [['text', '/router'], ['variable', '/', '[^/]++', 'token', true], ['text', '/_profiler']], [], [], []],
     '_profiler_exception' => [['token'], ['_controller' => 'web_profiler.controller.exception_panel::body'], [], [['text', '/exception'], ['variable', '/', '[^/]++', 'token', true], ['text', '/_profiler']], [], [], []],
     '_profiler_exception_css' => [['token'], ['_controller' => 'web_profiler.controller.exception_panel::stylesheet'], [], [['text', '/exception.css'], ['variable', '/', '[^/]++', 'token', true], ['text', '/_profiler']], [], [], []],
+    'movies_list' => [[], ['_controller' => 'App\\Controller\\MovieController::list'], [], [['text', '/movies']], [], [], []],
+    'movies_configuration' => [[], ['_controller' => 'App\\Controller\\MovieController::configuration'], [], [['text', '/movies/configuration']], [], [], []],
+    'movies_popular' => [[], ['_controller' => 'App\\Controller\\MovieController::popular'], [], [['text', '/movies/popular']], [], [], []],
     'movies' => [[], ['_controller' => 'App\\Controller\\MovieController::index'], [], [['text', '/movies']], [], [], []],
+    'App\Controller\MovieController::list' => [[], ['_controller' => 'App\\Controller\\MovieController::list'], [], [['text', '/movies']], [], [], []],
+    'App\Controller\MovieController::configuration' => [[], ['_controller' => 'App\\Controller\\MovieController::configuration'], [], [['text', '/movies/configuration']], [], [], []],
+    'App\Controller\MovieController::popular' => [[], ['_controller' => 'App\\Controller\\MovieController::popular'], [], [['text', '/movies/popular']], [], [], []],
 ];

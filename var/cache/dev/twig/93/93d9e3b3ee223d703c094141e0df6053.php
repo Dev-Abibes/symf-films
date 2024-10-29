@@ -1245,6 +1245,6 @@ class __TwigTemplate_23088fab4e2454a37f4cd138787562ef extends Template
         </span>
     {%- endif -%}
 {%- endblock form_help %}
-", "bootstrap_3_layout.html.twig", "/Users/securiteh/LabCoding/symf-films/my_project_directory/vendor/symfony/twig-bridge/Resources/views/Form/bootstrap_3_layout.html.twig");
+", "bootstrap_3_layout.html.twig", "/Users/securiteh/LabCoding/symf-films/vendor/symfony/twig-bridge/Resources/views/Form/bootstrap_3_layout.html.twig");
     }
 }

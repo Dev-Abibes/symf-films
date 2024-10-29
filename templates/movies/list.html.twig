@@ -1,0 +1,28 @@
+{# templates/movies/list.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des films{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1 class="mb-4">Films Populaires</h1>
+    <div class="row">
+        {% for movie in movies %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    {# Image du film #}
+                    <img src="{{ baseImageUrl }}{{ movie.poster_path }}" class="card-img-top" alt="{{ movie.title }}">
+                    <div class="card-body">
+                        {# Titre du film #}
+                        <h5 class="card-title">{{ movie.title }}</h5>
+                        {# Année de sortie #}
+                        <p class="card-text">Année de sortie : {{ movie.release_date|date('Y') }}</p>
+                        <a href="#" class="btn btn-primary">Détails</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

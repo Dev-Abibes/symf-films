@@ -348,24 +348,18 @@
       <tag name="controller.service_arguments"/>
       <tag name="routing.route_loader"/>
     </service>
-    <service id="App\Service\TmdbClient" class="App\Service\TmdbClient" autowire="true" autoconfigure="true">
-      <argument type="service" id=".debug.tmdb.client"/>
-      <argument type="service" id="cache.app"/>
-    </service>
     <service id="App\Entity" class="App\Entity" abstract="true">
       <tag name="container.excluded" source="in &quot;config/services.yaml&quot;"/>
     </service>
     <service id="App\Controller\MovieController" class="App\Controller\MovieController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
-      <argument type="service" id="App\Service\TmdbClient"/>
+      <argument type="service" id="App\Service\TMDbService"/>
       <call method="setContainer">
         <argument type="service" id=".service_locator.QaaoWjx.App\Controller\MovieController"/>
       </call>
     </service>
-    <service id="App\Service\TmbdClient" class="App\Service\TmbdClient" autowire="true" autoconfigure="true">
-      <tag name="container.error" message="The autoloader expected class &quot;App\Service\TmbdClient&quot; to be defined in file &quot;/Users/securiteh/LabCoding/symf-films/vendor/composer/../../src/Service/TmbdClient.php&quot;. The file was found but the class was not in it, the class name or namespace probably has a typo."/>
-    </service>
+    <service id="App\Service\TMDbService" class="App\Service\TMDbService" autowire="true" autoconfigure="true"/>
     <service id="argument_metadata_factory" class="Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadataFactory"/>
     <service id="argument_resolver.backed_enum_resolver" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\BackedEnumValueResolver">
       <tag priority="100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\BackedEnumValueResolver">controller.argument_value_resolver</tag>
@@ -542,7 +536,6 @@
         <argument key="monolog.handler.console" type="service" id="monolog.handler.console" on-invalid="ignore_uninitialized"/>
         <argument key="debug.security.event_dispatcher.main" type="service" id="debug.security.event_dispatcher.main" on-invalid="ignore_uninitialized"/>
         <argument key=".debug.http_client" type="service" id=".debug.http_client" on-invalid="ignore_uninitialized"/>
-        <argument key=".debug.tmdb.client" type="service" id=".debug.tmdb.client" on-invalid="ignore_uninitialized"/>
       </argument>
       <argument type="collection">
         <argument key="cache.app" type="collection">
@@ -646,9 +639,6 @@
           <argument>reset</argument>
         </argument>
         <argument key=".debug.http_client" type="collection">
-          <argument>reset</argument>
-        </argument>
-        <argument key=".debug.tmdb.client" type="collection">
           <argument>reset</argument>
         </argument>
       </argument>
@@ -1905,6 +1895,11 @@
       </call>
       <factory class="Symfony\Component\HttpClient\HttpClient" method="create"/>
     </service>
+    <service id="psr18.http_client" class="Symfony\Component\HttpClient\Psr18Client">
+      <argument type="service" id=".debug.http_client"/>
+      <argument>null</argument>
+      <argument>null</argument>
+    </service>
     <service id="http_client.abstract_retry_strategy" class="Symfony\Component\HttpClient\Retry\GenericRetryStrategy" abstract="true">
       <argument type="abstract">http codes</argument>
       <argument type="abstract">delay ms</argument>
@@ -1936,11 +1931,6 @@
     <service id="http_client.messenger.ping_webhook_handler" class="Symfony\Component\HttpClient\Messenger\PingWebhookMessageHandler">
       <tag name="messenger.message_handler"/>
       <argument type="service" id=".debug.http_client"/>
-    </service>
-    <service id="tmdb.client.uri_template" class="Symfony\Component\HttpClient\UriTemplateHttpClient">
-      <argument type="service" id="tmdb.client.uri_template.inner"/>
-      <argument>null</argument>
-      <argument type="collection"/>
     </service>
     <service id="mailer.mailer" class="Symfony\Component\Mailer\Mailer">
       <argument type="service" id="mailer.transports"/>
@@ -4846,10 +4836,6 @@
       <call method="registerClient">
         <argument>http_client</argument>
         <argument type="service" id=".debug.http_client"/>
-      </call>
-      <call method="registerClient">
-        <argument>tmdb.client</argument>
-        <argument type="service" id=".debug.tmdb.client"/>
       </call>
     </service>
     <service id="notifier.data_collector" class="Symfony\Component\Notifier\DataCollector\NotificationDataCollector">
@@ -7952,13 +7938,6 @@
       <argument type="service" id="http_client.uri_template"/>
       <argument type="service" id="debug.stopwatch" on-invalid="ignore"/>
     </service>
-    <service id=".debug.tmdb.client" class="Symfony\Component\HttpClient\TraceableHttpClient">
-      <tag name="http_client.client"/>
-      <tag name="kernel.reset" method="reset"/>
-      <tag name="container.decorator" id="tmdb.client" inner="tmdb.client.uri_template.inner"/>
-      <argument type="service" id="tmdb.client.uri_template"/>
-      <argument type="service" id="debug.stopwatch" on-invalid="ignore"/>
-    </service>
     <service id=".service_locator.wy_sXIY" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -8382,19 +8361,6 @@
         <argument type="service" id="http_client.transport"/>
       </argument>
       <factory function="current"/>
-    </service>
-    <service id="tmdb.client.uri_template.inner" class="Symfony\Component\HttpClient\ScopingHttpClient" constructor="forBaseUri">
-      <argument type="service" id="http_client.transport"/>
-      <argument>https://api.themoviedb.org/3/</argument>
-      <argument type="collection">
-        <argument key="headers" type="collection">
-          <argument key="Accept">application/json</argument>
-          <argument key="Authorization">Bearer %env(TMDB_API_TOKEN)%</argument>
-        </argument>
-        <argument key="query" type="collection"/>
-        <argument key="resolve" type="collection"/>
-        <argument key="extra" type="collection"/>
-      </argument>
     </service>
     <service id="asset_mapper.cached_mapped_asset_factory.inner" class="Symfony\Component\AssetMapper\Factory\MappedAssetFactory">
       <argument type="service" id="asset_mapper.public_assets_path_resolver"/>
@@ -9677,8 +9643,7 @@
     <service id="asset_mapper.http_client" alias=".debug.http_client"/>
     <service id="Symfony\Component\AssetMapper\ImportMap\ImportMapManager" alias="asset_mapper.importmap.manager"/>
     <service id="Symfony\Contracts\HttpClient\HttpClientInterface" alias=".debug.http_client"/>
-    <service id=".Symfony\Contracts\HttpClient\HttpClientInterface $tmdb.client" alias=".debug.tmdb.client"/>
-    <service id="Symfony\Contracts\HttpClient\HttpClientInterface $tmdbClient" alias=".debug.tmdb.client"/>
+    <service id="Psr\Http\Client\ClientInterface" alias="psr18.http_client"/>
     <service id="mailer" alias="mailer.mailer"/>
     <service id="Symfony\Component\Mailer\MailerInterface" alias="mailer.mailer"/>
     <service id="Symfony\Component\Mailer\Transport\TransportInterface" alias="mailer.default_transport"/>
@@ -9809,9 +9774,7 @@
     <service id=".service_locator.hUPzsWO" alias=".service_locator.ea.H0ae"/>
     <service id="validator" alias="debug.validator"/>
     <service id="http_client" alias=".debug.http_client"/>
-    <service id="tmdb.client" alias=".debug.tmdb.client"/>
     <service id=".debug.http_client.inner" alias="http_client.uri_template"/>
-    <service id=".debug.tmdb.client.inner" alias="tmdb.client.uri_template"/>
     <service id="asset_mapper.mapped_asset_factory" alias="asset_mapper.cached_mapped_asset_factory"/>
     <service id="assets._default_package" alias="asset_mapper.asset_package"/>
     <service id="event_dispatcher" alias="debug.event_dispatcher" public="true"/>

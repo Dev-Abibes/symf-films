@@ -471,6 +471,6 @@ class __TwigTemplate_20bdec7227895ef682b28959393e0195 extends Template
         </div>
     {% endfor %}
 {% endblock %}
-", "@Debug/Profiler/dump.html.twig", "/Users/securiteh/LabCoding/symf-films/my_project_directory/vendor/symfony/debug-bundle/Resources/views/Profiler/dump.html.twig");
+", "@Debug/Profiler/dump.html.twig", "/Users/securiteh/LabCoding/symf-films/vendor/symfony/debug-bundle/Resources/views/Profiler/dump.html.twig");
     }
 }
